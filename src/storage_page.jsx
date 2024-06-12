@@ -7,7 +7,7 @@ export default function Storage_Page() {
     const [file, setFile] = React.useState();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleChange = (event: any) => {
+    const handleChange = (event) => {
         setFile(event.target.files[0]);
     };
 

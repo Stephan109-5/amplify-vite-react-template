@@ -1,7 +1,7 @@
 import '@aws-amplify/ui-react/styles.css'
 import { Route, Routes } from "react-router-dom";
 import Todo from "./todo";
-import Storage_Page from './storage_page';
+import Storage_Page from './storage_page.jsx';
 
 // const client = generateClient<Schema>();
 

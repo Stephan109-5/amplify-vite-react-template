@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { Authenticator } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
-// import { getUrl } from 'aws-amplify/storage';
+import { getUrl } from 'aws-amplify/storage';
 import { list } from 'aws-amplify/storage';
 
 export default function Storage_Page() {
@@ -16,7 +16,11 @@ export default function Storage_Page() {
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
             // console.log(result);
-            setListImg(result.items);
+            const urlList =  result.items.map(async (item)=> {
+                const url = await getUrl({path: item.path});
+                return url
+            })
+            setListImg(urlList);
         } catch (error) {
             console.log(error);
         }
@@ -56,6 +60,10 @@ export default function Storage_Page() {
                         />
                         {listImg.map((item)=> (
                             <StorageImage path={item.path} />
+                        )
+                        )}
+                        {listImg.map((item)=> (
+                            <img src={item} />
                         )
                         )}
                     </div>

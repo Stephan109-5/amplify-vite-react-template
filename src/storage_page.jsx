@@ -30,7 +30,7 @@ export default function Storage_Page() {
                         </button>
                         <StorageManager
                             acceptedFileTypes={['image/*']}
-                            path="picture-submission/"
+                            path={({ identityId }) => `picture-submissions/${identityId}/`}
                             maxFileCount={1}
                             isResumable
                         />

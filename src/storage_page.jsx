@@ -14,8 +14,8 @@ export default function Storage_Page() {
             const result = await list({
                 path: ({ identityId }) => `picture-submissions/${identityId}/`,
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
-                options: { listAll: true } 
             });
+            console.log(result);
             const imageKeys = result.map((file) => file.key);
             console.log(imageKeys);
             // setListImg(urlList);

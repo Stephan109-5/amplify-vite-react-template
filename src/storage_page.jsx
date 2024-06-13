@@ -1,12 +1,23 @@
 import React from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { Authenticator } from '@aws-amplify/ui-react'
-import { StorageManager } from '@aws-amplify/ui-react-storage';
+import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
 // import { getUrl } from 'aws-amplify/storage';
-import {AmplifyS3Album} from "@aws-amplify/ui-react/legacy";
+import { list } from 'aws-amplify/storage';
+
+try {
+  const result = await list({
+    path: ({ identityId }) => `picture-submissions/${identityId}/`,
+    // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
+  });
+  console.log(result);
+} catch (error) {
+  console.log(error);
+}
 
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event) => {
         setFile(event.target.files[0]);
@@ -35,7 +46,7 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
-                        <AmplifyS3Album/>
+                        <StorageImage path={({ identityId }) => `picture-submissions/${identityId}/`}/>
                     </div>
                     <button onClick={signOut}>Sign out</button>
                 </main>

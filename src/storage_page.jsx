@@ -15,7 +15,7 @@ export default function Storage_Page() {
                 path: ({ identityId }) => `picture-submissions/${identityId}/`,
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
-            // console.log(result);
+            console.log(result.items);
             const urlList =  result.items.map(async (item)=> {
                 const url = await getUrl({path: item.path});
                 console.log(url);

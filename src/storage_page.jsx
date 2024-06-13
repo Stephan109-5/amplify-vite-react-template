@@ -2,10 +2,11 @@ import React from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { Authenticator } from '@aws-amplify/ui-react'
 import { StorageManager } from '@aws-amplify/ui-react-storage';
+// import { getUrl } from 'aws-amplify/storage';
+import {AmplifyS3Album} from "@aws-amplify/ui-react/legacy";
 
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event) => {
         setFile(event.target.files[0]);
@@ -34,6 +35,7 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
+                        <AmplifyS3Album/>
                     </div>
                     <button onClick={signOut}>Sign out</button>
                 </main>

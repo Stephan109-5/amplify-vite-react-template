@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { Authenticator } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
 // import { getUrl } from 'aws-amplify/storage';
 import { list } from 'aws-amplify/storage';
 
-try {
-  const result = await list({
-    path: ({ identityId }) => `picture-submissions/${identityId}/`,
-    // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
-  });
-  console.log(result);
-} catch (error) {
-  console.log(error);
-}
-
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
+
+    async function GetList(){
+        try {
+            const result = await list({
+                path: ({ identityId }) => `picture-submissions/${identityId}/`,
+                // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
+            });
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event) => {
         setFile(event.target.files[0]);
     };
+
+    useEffect(()=>{
+        GetList();
+    }, [])
 
     return (
         <Authenticator>
@@ -46,7 +52,7 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
-                        <StorageImage path={({ identityId }) => `picture-submissions/${identityId}/`}/>
+                        <StorageImage path={({ identityId }) => `picture-submissions/${identityId}/`} />
                     </div>
                     <button onClick={signOut}>Sign out</button>
                 </main>

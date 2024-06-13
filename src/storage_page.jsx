@@ -8,17 +8,27 @@ import { list } from 'aws-amplify/storage';
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
     const [listImg, setListImg] = React.useState();
+    const [gallery, setGallery] = React.useState();
 
-    async function GetList(){
+    async function GetList() {
         try {
             const result = await list({
                 path: ({ identityId }) => `picture-submissions/${identityId}/`,
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
-            console.log(result);
+            console.log(result.items);
             // const imageKeys = result.items.map((file) => file.key);
             // console.log(imageKeys);
             setListImg(result.items);
+            let listz = result.items;
+            setGallery(
+                    listz.map((item) => {
+                        console.log(item.path)
+                        return (
+                            <StorageImage path={item.path} />
+                        )
+                    })
+                )
         } catch (error) {
             console.log(error);
         }
@@ -29,7 +39,7 @@ export default function Storage_Page() {
         setFile(event.target.files[0]);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         GetList();
     }, [])
 
@@ -56,17 +66,13 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
-                        {listImg.map((item)=> {
+                        {/* {listImg.map((item) => {
                             console.log(item.path)
-                            return(
+                            return (
                                 <StorageImage path={item.path} />
                             )
-                        }
-                        )}
-                        {/* {listImg.map((item)=> (
-                            <img src={item} />
-                        )
-                        )} */}
+                        })} */}
+                        {gallery}
                     </div>
                     <button onClick={signOut}>Sign out</button>
                 </main>

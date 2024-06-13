@@ -16,8 +16,8 @@ export default function Storage_Page() {
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
             console.log(result);
-            const imageKeys = result.items.map((file) => file.key);
-            console.log(imageKeys);
+            // const imageKeys = result.items.map((file) => file.key);
+            // console.log(imageKeys);
             setListImg(result.items);
         } catch (error) {
             console.log(error);

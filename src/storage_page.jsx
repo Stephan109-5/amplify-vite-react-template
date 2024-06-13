@@ -7,7 +7,7 @@ import { list } from 'aws-amplify/storage';
 
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
-    // const [listImg, setListImg] = React.useState();
+    const [listImg, setListImg] = React.useState();
 
     async function GetList(){
         try {
@@ -16,9 +16,9 @@ export default function Storage_Page() {
                 // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
             console.log(result);
-            const imageKeys = result.map((file) => file.key);
+            const imageKeys = result.items.map((file) => file.key);
             console.log(imageKeys);
-            // setListImg(urlList);
+            setListImg(result.items);
         } catch (error) {
             console.log(error);
         }
@@ -56,10 +56,13 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
-                        {/* {listImg.map((item)=> (
-                            <StorageImage path={item.path} />
-                        )
-                        )} */}
+                        {listImg.map((item)=> {
+                            console.log(item.path)
+                            return(
+                                <StorageImage path={item.path} />
+                            )
+                        }
+                        )}
                         {/* {listImg.map((item)=> (
                             <img src={item} />
                         )

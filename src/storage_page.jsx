@@ -18,6 +18,7 @@ export default function Storage_Page() {
             // console.log(result);
             const urlList =  result.items.map(async (item)=> {
                 const url = await getUrl({path: item.path});
+                console.log(url);
                 return url
             })
             setListImg(urlList);

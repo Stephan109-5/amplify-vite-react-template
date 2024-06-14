@@ -1,18 +1,20 @@
 import '@aws-amplify/ui-react/styles.css'
 import { Route, Routes } from "react-router-dom";
 import Todo from "./todo";
-import Storage_Page from './storage_page.jsx';
+import Gallery_Page from './gallery';
 
 // const client = generateClient<Schema>();
 
 function App() {
   return (
+      <>
         <Routes>
           <Route path="/">
             <Route index element={<Todo/>} />
-            <Route path='storing' element={<Storage_Page/>} />
+            <Route path='gallery' element={<Gallery_Page/>} />
           </Route>
         </Routes>
+      </>
   );
 }
 

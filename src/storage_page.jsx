@@ -57,7 +57,7 @@ export default function Storage_Page() {
                                 items={listImg}
                                 type="grid"
                                 templateColumns="1fr 1fr 1fr"
-                                templateRows="8rem 8rem 8rem"
+                                templateRows="8rem"
                                 gap={'12px'}
                             >
                                 {(item, index) => {

@@ -62,7 +62,7 @@ export default function Storage_Page() {
                             >
                                 {(item, index) => {
                                     return (
-                                        <StorageImage key={index} width={'8rem'} height={'8rem'} path={item.path} />
+                                        <StorageImage key={index} padding={'medium'} width={'8rem'} height={'8rem'} path={item.path} />
                                     )
                                 }}
                             </Collection>

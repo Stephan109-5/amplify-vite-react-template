@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 // import { uploadData } from 'aws-amplify/storage';
-import { Authenticator, Button, ButtonGroup, Card, Collection, Flex, Heading } from '@aws-amplify/ui-react'
+import { Authenticator, Button, ButtonGroup, Card, Collection, Divider, Flex, Heading, View } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
-import { list} from 'aws-amplify/storage';
+import { list, remove} from 'aws-amplify/storage';
 import type { ListPaginateWithPathOutput } from 'aws-amplify/storage';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +23,16 @@ export default function Gallery_Page() {
         }
     }
 
+    async function DeleteImg(imgpath: string) {
+        try {
+            await remove({ 
+              path: imgpath,
+              // Alternatively, path: ({identityId}) => `album/{identityId}/1.jpg`
+            });
+          } catch (error) {
+            console.log('Error ', error);
+          }
+    }
     // const handleChange = (event) => {
     //     setFile(event.target.files[0]);
     // };
@@ -80,6 +90,17 @@ export default function Gallery_Page() {
                                             variation="outlined"
                                         >
                                             <StorageImage key={index} alt={'pic'+index} path={item.path} />
+                                            <View>
+                                                <Divider padding="xs" />
+                                                <Button 
+                                                    style={{marginTop: '0.5rem', width: '100%'}} 
+                                                    variation="primary" 
+                                                    colorTheme="warning"
+                                                    onClick={()=> DeleteImg(item.path)}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </View>
                                         </Card>
                                     )
                                 }}

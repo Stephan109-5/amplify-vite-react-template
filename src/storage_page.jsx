@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { uploadData } from 'aws-amplify/storage';
+// import { uploadData } from 'aws-amplify/storage';
 import { Authenticator, Collection } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
 import { list } from 'aws-amplify/storage';
 
 export default function Storage_Page() {
-    const [file, setFile] = React.useState();
+    // const [file, setFile] = React.useState();
     const [listImg, setListImg] = React.useState([]);
     // const [gallery, setGallery] = React.useState();
 
@@ -21,9 +21,9 @@ export default function Storage_Page() {
         }
     }
 
-    const handleChange = (event) => {
-        setFile(event.target.files[0]);
-    };
+    // const handleChange = (event) => {
+    //     setFile(event.target.files[0]);
+    // };
 
     useEffect(() => {
         GetList();
@@ -35,7 +35,7 @@ export default function Storage_Page() {
                 <main>
                     <h1>{user?.signInDetails?.loginId}'s Storage</h1>
                     <div>
-                        <input type="file" onChange={handleChange} />
+                        {/* <input type="file" onChange={handleChange} />
                         <button
                             onClick={() =>
                                 uploadData({
@@ -45,7 +45,7 @@ export default function Storage_Page() {
                             }
                         >
                             Upload
-                        </button>
+                        </button> */}
                         <StorageManager
                             acceptedFileTypes={['image/*']}
                             path={({ identityId }) => `picture-submissions/${identityId}/`}

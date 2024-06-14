@@ -1,34 +1,31 @@
 import React, { useEffect } from 'react';
 import { uploadData } from 'aws-amplify/storage';
-import { Authenticator } from '@aws-amplify/ui-react'
+import { Authenticator, Collection } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
 // import { Storage } from 'aws-amplify';
 import { list } from 'aws-amplify/storage';
 
 export default function Storage_Page() {
     const [file, setFile] = React.useState();
-    const [listImg, setListImg] = React.useState();
-    const [gallery, setGallery] = React.useState();
+    const [listImg, setListImg] = React.useState([]);
+    // const [gallery, setGallery] = React.useState();
 
     async function GetList() {
         try {
             const result = await list({
                 path: ({ identityId }) => `picture-submissions/${identityId}/`,
-                // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
             });
-            console.log(result.items);
-            // const imageKeys = result.items.map((file) => file.key);
-            // console.log(imageKeys);
+
             setListImg(result.items);
-            let listz = result.items;
-            setGallery(
-                    listz.map((item) => {
-                        console.log(item.path)
-                        return (
-                            <StorageImage path={item.path} />
-                        )
-                    })
-                )
+            // let listz = result.items;
+            // setGallery(
+            //     listz.map((item) => {
+            //         console.log(item.path)
+            //         return (
+            //             <StorageImage path={item.path} />
+            //         )
+            //     })
+            // )
         } catch (error) {
             console.log(error);
         }
@@ -72,7 +69,21 @@ export default function Storage_Page() {
                                 <StorageImage path={item.path} />
                             )
                         })} */}
-                        {gallery}
+                        {listImg.length > 0 &&
+                            <Collection
+                                items={listImg}
+                                type="grid"
+                                templateColumns="1fr 1fr 1fr"
+                                templateRows="12rem 12rem 12rem"
+                            >
+                                {(item, index) => {
+                                    return (
+                                        <StorageImage key={index} path={item.path} />
+                                    )
+                                }}
+                            </Collection>
+                        }
+
                     </div>
                     <button onClick={signOut}>Sign out</button>
                 </main>

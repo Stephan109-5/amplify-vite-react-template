@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { Authenticator, Collection } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
-// import { Storage } from 'aws-amplify';
 import { list } from 'aws-amplify/storage';
 
 export default function Storage_Page() {
@@ -17,21 +16,11 @@ export default function Storage_Page() {
             });
 
             setListImg(result.items);
-            // let listz = result.items;
-            // setGallery(
-            //     listz.map((item) => {
-            //         console.log(item.path)
-            //         return (
-            //             <StorageImage path={item.path} />
-            //         )
-            //     })
-            // )
         } catch (error) {
             console.log(error);
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event) => {
         setFile(event.target.files[0]);
     };
@@ -63,23 +52,17 @@ export default function Storage_Page() {
                             maxFileCount={1}
                             isResumable
                         />
-                        {/* {listImg.map((item) => {
-                            console.log(item.path)
-                            return (
-                                <StorageImage path={item.path} />
-                            )
-                        })} */}
                         {listImg.length > 0 &&
                             <Collection
                                 items={listImg}
                                 type="grid"
                                 templateColumns="1fr 1fr 1fr"
-                                templateRows="12rem 12rem 12rem"
+                                templateRows="8rem 8rem 8rem"
                                 gap={'12px'}
                             >
                                 {(item, index) => {
                                     return (
-                                        <StorageImage key={index} width={'medium'} height={'medium'} path={item.path} />
+                                        <StorageImage key={index} width={'8rem'} height={'8rem'} path={item.path} />
                                     )
                                 }}
                             </Collection>

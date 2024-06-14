@@ -75,10 +75,11 @@ export default function Storage_Page() {
                                 type="grid"
                                 templateColumns="1fr 1fr 1fr"
                                 templateRows="12rem 12rem 12rem"
+                                gap={'12px'}
                             >
                                 {(item, index) => {
                                     return (
-                                        <StorageImage key={index} path={item.path} />
+                                        <StorageImage key={index} width={'medium'} height={'medium'} path={item.path} />
                                     )
                                 }}
                             </Collection>

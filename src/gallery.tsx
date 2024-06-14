@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import { uploadData } from 'aws-amplify/storage';
-import { Authenticator, Button, ButtonGroup, Card, Collection, Divider, Flex, Heading, View } from '@aws-amplify/ui-react'
+import { Authenticator, Button, Card, Collection, Divider, Flex, Heading, View } from '@aws-amplify/ui-react'
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
 import { list, remove} from 'aws-amplify/storage';
 import type { ListPaginateWithPathOutput } from 'aws-amplify/storage';
@@ -29,6 +29,7 @@ export default function Gallery_Page() {
               path: imgpath,
               // Alternatively, path: ({identityId}) => `album/{identityId}/1.jpg`
             });
+            GetList();
           } catch (error) {
             console.log('Error ', error);
           }
@@ -47,10 +48,10 @@ export default function Gallery_Page() {
                 <main style={{marginTop: '1rem'}}>
                     <Flex direction={'row'} alignItems="center" justifyContent="space-between" style={{paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
                     <Heading level={5}>{user?.signInDetails?.loginId}'s Gallery</Heading>
-                    <ButtonGroup>
-                        <Button style={{border: '1px solid black'}} onClick={() => navigate('/')}>ToDo List</Button> 
-                        <button onClick={signOut}>Sign out</button> 
-                    </ButtonGroup>
+                        <Flex direction={'row'} alignItems="center" justifyContent="space-between">
+                            <Button style={{border: '1px solid black'}} onClick={() => navigate('/')}>ToDo List</Button> 
+                            <button onClick={signOut}>Sign out</button> 
+                        </Flex>
                     </Flex>
                     <div>
                         {/* <input type="file" onChange={handleChange} />

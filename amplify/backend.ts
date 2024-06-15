@@ -19,12 +19,10 @@ const backend = defineBackend({
 
 // Configure a policy for the required use case.
 // The actions included below cover all supported ML capabilities
-backend.auth.resources.unauthenticatedUserIamRole.addToPrincipalPolicy(
+backend.auth.resources.authenticatedUserIamRole.addToPrincipalPolicy(
   new PolicyStatement({
     actions: [
       "translate:TranslateText",
-      "polly:SynthesizeSpeech",
-      "transcribe:StartStreamTranscriptionWebSocket",
     ],
     resources: ["*"],
   })
@@ -37,23 +35,7 @@ backend.addOutput({
         translateText: {
           defaults: {
             sourceLanguage: "en",
-            targetLanguage: "es",
-          },
-          proxy: false,
-          region: Stack.of(backend.auth.resources.unauthenticatedUserIamRole)
-            .region,
-        },
-        speechGenerator: {
-          defaults: {
-            voiceId: "Ivy",
-          },
-          proxy: false,
-          region: Stack.of(backend.auth.resources.unauthenticatedUserIamRole)
-            .region,
-        },
-        transcription: {
-          defaults: {
-            language: "en-US",
+            targetLanguage: "zh-TW",
           },
           proxy: false,
           region: Stack.of(backend.auth.resources.unauthenticatedUserIamRole)

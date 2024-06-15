@@ -4,7 +4,6 @@ import Todo from "./todo";
 import Gallery_Page from './gallery';
 import Translate from './translate';
 
-// const client = generateClient<Schema>();
 
 function App() {
   return (

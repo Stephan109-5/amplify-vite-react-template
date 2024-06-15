@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Authenticator, Button, ButtonGroup, Flex, Heading } from '@aws-amplify/ui-react'
+import { Authenticator, Flex, Heading, Menu, MenuItem } from '@aws-amplify/ui-react'
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useNavigate } from 'react-router-dom';
@@ -28,12 +28,16 @@ export default function Todo() {
         <Authenticator>
             {({ signOut, user }) => (
                 <main>
-                    <Flex direction={'row'} alignItems="center" justifyContent="space-between" style={{paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
+                    <Flex direction={'row'} alignItems="center" justifyContent="space-between" style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
                         <Heading level={5}>{user?.signInDetails?.loginId}'s todos</Heading>
-                        <ButtonGroup>
-                            <Button style={{border: '1px solid black'}} onClick={() => navigate('/gallery')}>Gallery</Button> 
-                            <button style={{border: '1px solid black'}} onClick={signOut}>Sign out</button> 
-                        </ButtonGroup>
+                        <Menu menuAlign="end">
+                            <MenuItem onClick={() => navigate('/gallery')}>
+                                Gallery
+                            </MenuItem>
+                            <MenuItem onClick={() => navigate('/translate')}>
+                                Translate
+                            </MenuItem>
+                        </Menu>
                     </Flex>
                     <button onClick={createTodo}>+ new</button>
                     <ul>
@@ -48,6 +52,7 @@ export default function Todo() {
                             Review next step of this tutorial.
                         </a>
                     </div>
+                    <button onClick={signOut}>Sign out</button>
                 </main>
             )}
         </Authenticator>

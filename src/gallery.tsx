@@ -45,7 +45,7 @@ export default function Gallery_Page() {
     return (
         <Authenticator> 
             {({ signOut, user }) => (
-                <main style={{marginTop: '1rem'}}>
+                <main style={{padding: '1rem'}}>
                     <Flex direction={'row'} alignItems="center" justifyContent="space-between" style={{paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
                         <Heading level={5}>{user?.signInDetails?.loginId}'s Gallery</Heading>
                         <Menu 
@@ -91,6 +91,7 @@ export default function Gallery_Page() {
                                 direction="row"
                                 gap="1rem"
                                 maxWidth={'41rem'}
+                                justifyContent={'center'}
                                 wrap="wrap"
                             >
                                 {(item, index) => {
